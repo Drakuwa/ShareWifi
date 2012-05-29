@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/apntxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="10dip"
+        android:layout_marginTop="10dip"
+        android:text="@string/apn" />
+
+    <EditText
+        android:id="@+id/apn"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/apntxt"
+        android:layout_marginLeft="10dip"
+        android:layout_marginRight="10dip"
+        android:inputType="text"
+        android:singleLine="true" />
+
+    <TextView
+        android:id="@+id/passtxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/apn"
+        android:layout_marginLeft="10dip"
+        android:layout_marginTop="10dip"
+        android:text="@string/pass" />
+
+    <EditText
+        android:id="@+id/password"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/passtxt"
+        android:layout_marginLeft="10dip"
+        android:layout_marginRight="10dip"
+        android:inputType="text"
+        android:singleLine="true" />
+
+    <TextView
+        android:id="@+id/loctxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/password"
+        android:layout_marginLeft="10dip"
+        android:layout_marginTop="10dip"
+        android:text="@string/bssid" />
+
+    <EditText
+        android:id="@+id/location"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/loctxt"
+        android:layout_marginLeft="10dip"
+        android:layout_marginRight="10dip"
+        android:inputType="textNoSuggestions"
+        android:singleLine="true" />
+
+    <Button
+        android:id="@+id/save"
+        android:layout_width="150dip"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/location"
+        android:layout_below="@id/location"
+        android:layout_marginTop="20dip"
+        android:text="@string/save" />
+
+    <Button
+        android:id="@+id/cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@id/location"
+        android:layout_below="@id/location"
+        android:layout_marginLeft="10dip"
+        android:layout_marginTop="20dip"
+        android:layout_toRightOf="@id/save"
+        android:text="@string/cancel" />
+
+</RelativeLayout>

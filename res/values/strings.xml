@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ShareWifi</string>
+    <string name="scan">Scan!</string>
+    <string name="pass">Password:</string>
+    <string name="bssid">BSSID:</string>
+    <string name="save">Save!</string>
+    <string name="cancel">Cancel</string>
+    <string name="apn">Access Point Name:</string>
+</resources>
