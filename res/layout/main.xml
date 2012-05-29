@@ -1,32 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    >
-    <LinearLayout 
-    android:orientation="horizontal"
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content" android:baselineAligned="false">
-    	<Button 
-			android:id="@+id/scan"
-			android:text="@string/scan"
-    		android:layout_width="wrap_content" 
-    		android:layout_height="wrap_content" 
-    		android:layout_weight="1"/>
-		<ToggleButton 
-			android:id="@+id/toggle"
-			android:layout_width="wrap_content"
-    		android:layout_height="wrap_content"
-    		android:textOn="WiFi On!"
-    		android:textOff="WiFi Off!" 
-    		android:layout_weight="0.3"/>
+    android:background="@drawable/bg"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:baselineAligned="false"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/scan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/scan" />
+
+        <ToggleButton
+            android:id="@+id/toggle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.3"
+            android:textOff="WiFi Off!"
+            android:textOn="WiFi On!" />
     </LinearLayout>
 
-<ListView 
-	android:id="@+id/accesspointslist"
-	android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    android:layout_margin="5dip"
-/>
+    <ListView
+        android:id="@+id/accesspointslist"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dip"
+        android:cacheColorHint="#00000000" />
+
 </LinearLayout>
