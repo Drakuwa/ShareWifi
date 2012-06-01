@@ -13,18 +13,22 @@
 
         <Button
             android:id="@+id/scan"
+            android:background="@drawable/scan_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/scan" />
+            android:layout_weight="0.35"
+            android:text="@string/scan"
+            android:textSize="22dip"
+            android:textStyle="bold"
+            android:textColor="#101010" />
 
         <ToggleButton
             android:id="@+id/toggle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="0.3"
-            android:textOff="WiFi Off!"
-            android:textOn="WiFi On!" />
+            android:background="@android:color/transparent"
+            android:button="@drawable/togglewifi" />
     </LinearLayout>
 
     <ListView
