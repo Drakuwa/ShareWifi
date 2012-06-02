@@ -21,15 +21,11 @@ public final class R {
         public static final int scan_small=0x7f020007;
         public static final int scan_small_active=0x7f020008;
         public static final int status_bg=0x7f020009;
-        public static final int togglebutton=0x7f02000a;
-        public static final int togglewifi=0x7f02000b;
-        public static final int wep=0x7f02000c;
-        public static final int wifi=0x7f02000d;
-        public static final int wifi_off=0x7f02000e;
-        public static final int wifi_on=0x7f02000f;
-        public static final int wifiofff=0x7f020010;
-        public static final int wifionn=0x7f020011;
-        public static final int wpa=0x7f020012;
+        public static final int togglewifi=0x7f02000a;
+        public static final int wep=0x7f02000b;
+        public static final int wifi_off=0x7f02000c;
+        public static final int wifi_on=0x7f02000d;
+        public static final int wpa=0x7f02000e;
     }
     public static final class id {
         public static final int accesspointslist=0x7f050011;

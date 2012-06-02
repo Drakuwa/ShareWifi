@@ -594,7 +594,7 @@ public class ShareWifiActivity extends Activity {
 		WifiInfo w = mWiFiManager.getConnectionInfo();
 		if(w.getBSSID()!=null){
 			TextView status = (TextView)findViewById(R.id.status);
-			status.setText("Status: Connected! \n AP name: " + w.getSSID() + "\n" + "BSSID: "+w.getBSSID() + "\n" + "Speed: "+ w.getLinkSpeed()+"MBps");
+			status.setText("Status: Connected! \nAP name: " + w.getSSID() + "\n" + "BSSID: "+w.getBSSID() + "\n" + "Speed: "+ w.getLinkSpeed()+"MBps");
 		}
 	}
 }
