@@ -36,9 +36,7 @@ public class ShareWifiActivity extends Activity {
 
 	private WifiManager mWiFiManager;
 	private ToggleButton togglebutton;
-	
-	//private ArrayList<String> AP = new ArrayList<String>();
-	
+		
 	private ListView lv;
 	private SimpleAdapter adapter;
 	private HashMap<String, Object> row = new HashMap<String, Object>();
