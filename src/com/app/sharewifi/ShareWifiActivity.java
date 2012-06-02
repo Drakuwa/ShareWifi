@@ -150,10 +150,9 @@ public class ShareWifiActivity extends Activity {
 								"WIFI Connected...", Toast.LENGTH_SHORT).show();
 						// If the phone has successfully connected to the AP,
 						// save it!
+						refreshStatus();
 						mWiFiManager.saveConfiguration();
 						isConnectedOrFailed = true;
-						
-						refreshStatus();
 						
 						unregisterReceiver(broadcastReceiver);
 						unregisterReceiver(br);
