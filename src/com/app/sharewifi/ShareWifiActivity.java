@@ -134,6 +134,12 @@ public class ShareWifiActivity extends Activity {
 
 			@Override
 			public void onReceive(Context context, Intent intent) {
+				try {
+					Thread.sleep(1000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				String reason = intent
 						.getStringExtra(ConnectivityManager.EXTRA_REASON);
 				NetworkInfo currentNetworkInfo = (NetworkInfo) intent
@@ -304,6 +310,11 @@ public class ShareWifiActivity extends Activity {
 							if(existing!=null){
 								netId = mWiFiManager.updateNetwork(existing);
 								mWiFiManager.enableNetwork(netId, true);
+								
+								registerReceiver(broadcastReceiver, intentFilter);
+								registerReceiver(br, ifil);
+								receiverRegistered = true;
+								new isConnected().execute();
 							}
 						}
 						else if(data.get(position).get("Type").equals(R.drawable.open)){
