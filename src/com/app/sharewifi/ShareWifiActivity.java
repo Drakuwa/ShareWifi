@@ -1,10 +1,5 @@
 package com.app.sharewifi;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -13,11 +8,9 @@ import java.util.List;
 import java.util.Map;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.ConnectivityManager;
@@ -59,6 +52,8 @@ public class ShareWifiActivity extends Activity {
 	private int netId;
 	public boolean isConnectedOrFailed = false;
 	public boolean isWEP = false;
+	
+	public Model model = new Model(this);
 
 	/** Called when the activity is first created. */
 	@Override
@@ -76,7 +71,7 @@ public class ShareWifiActivity extends Activity {
 		 * Check if there are exceptions saved in a local file, and send/delete
 		 * them
 		 */
-		checkBugs();
+		model.checkBugs();
 
 		// Initialize the WifiManager
 		mWiFiManager = (WifiManager) getSystemService(Context.WIFI_SERVICE);
@@ -106,7 +101,14 @@ public class ShareWifiActivity extends Activity {
 							mWiFiManager.setWifiEnabled(true);
 				} else if (mWiFiManager.isWifiEnabled())
 					if (mWiFiManager.getWifiState() != WifiManager.WIFI_STATE_DISABLING)
-						mWiFiManager.setWifiEnabled(false);
+						{
+							mWiFiManager.setWifiEnabled(false);
+							if(data!=null&&row!=null&&adapter!=null){
+								data.clear();
+								row.clear();
+								adapter.notifyDataSetChanged();
+							}
+						}
 			}
 		});
 
@@ -321,36 +323,6 @@ public class ShareWifiActivity extends Activity {
 	}
 
 	/**
-	 * Create an alert dialog that redirects you to the internet options on the
-	 * phone, so you can enable an internet connection
-	 */
-	public void createInternetDisabledAlert() {
-		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-		builder.setMessage(
-				"Your internet connection is disabled! Please enable WiFi, or mobile internet")
-				.setIcon(R.drawable.ic_launcher)
-				.setTitle(R.string.app_name)
-				.setCancelable(false)
-				.setPositiveButton("Internet options",
-						new DialogInterface.OnClickListener() {
-							public void onClick(DialogInterface dialog, int id) {
-								showNetOptions();
-							}
-						});
-		AlertDialog alert = builder.create();
-		alert.show();
-	}
-
-	/**
-	 * Start the wireless settings activity
-	 */
-	public void showNetOptions() {
-		Intent netOptionsIntent = new Intent(
-				android.provider.Settings.ACTION_WIRELESS_SETTINGS);
-		this.startActivity(netOptionsIntent);
-	}
-
-	/**
 	 * Get the currently available APs from the scan, and add them to an array
 	 * list
 	 */
@@ -478,87 +450,6 @@ public class ShareWifiActivity extends Activity {
 			// Remove the progress dialog.
 			dialog.dismiss();
 		}
-	}
-
-	/**
-	 * A function that checks the existence of stack.trace file and calls a
-	 * function alert for sending/deleting it
-	 */
-	private void checkBugs() {
-
-		File file = new File("/data/data/com.app.wifipass/files/stack.trace");
-		if (file.exists()) {
-
-			String line = "";
-			String trace = "";
-			try {
-				BufferedReader reader = new BufferedReader(
-						new InputStreamReader(
-								ShareWifiActivity.this
-										.openFileInput("stack.trace")));
-				while ((line = reader.readLine()) != null) {
-					trace += line + "\n";
-				}
-			} catch (FileNotFoundException fnfe) {
-				// ...
-			} catch (IOException ioe) {
-				// ...
-			}
-
-			syncExceptionsAlert(trace);
-		}
-	}
-
-	/**
-	 * A function that shows an AlertDialog for deleting/sending the stack.trace
-	 * file to the developers email
-	 * 
-	 * @param trace
-	 */
-	public void syncExceptionsAlert(final String trace) {
-		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-		builder.setMessage(
-				"There are unsent bugs, report them via email to the developer, or delete them? ")
-				.setIcon(R.drawable.ic_launcher)
-				.setTitle(R.string.app_name)
-				.setCancelable(true)
-				.setPositiveButton("Report",
-						new DialogInterface.OnClickListener() {
-							public void onClick(DialogInterface dialog, int id) {
-								Intent sendIntent = new Intent(
-										Intent.ACTION_SEND);
-								String subject = "Bug report";
-								String body = "Mail bugs to drakuwa@gmail.com: "
-										+ "\n\n" + trace + "\n\n";
-
-								sendIntent.putExtra(Intent.EXTRA_EMAIL,
-										new String[] { "drakuwa@gmail.com" });
-								sendIntent.putExtra(Intent.EXTRA_TEXT, body);
-								sendIntent.putExtra(Intent.EXTRA_SUBJECT,
-										subject);
-								sendIntent.setType("message/rfc822");
-
-								ShareWifiActivity.this.startActivity(Intent
-										.createChooser(sendIntent, "Title:"));
-
-								ShareWifiActivity.this
-										.deleteFile("stack.trace");
-							}
-						});
-		builder.setNegativeButton("Delete",
-				new DialogInterface.OnClickListener() {
-					public void onClick(DialogInterface dialog, int id) {
-						File file = new File(
-								"/data/data/com.app.wifipass/files/stack.trace");
-						if (file.exists()) {
-							ShareWifiActivity.this
-									.deleteFile("stack.trace");
-						}
-						dialog.cancel();
-					}
-				});
-		AlertDialog alert = builder.create();
-		alert.show();
 	}
 	
 	class MapComparator implements Comparator<Map<String, ?>> {
