@@ -23,6 +23,7 @@ import android.net.wifi.WifiManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.InputType;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -329,6 +330,7 @@ public class ShareWifiActivity extends Activity {
 
 					        // Set an EditText view to get user input 
 					        final EditText input = new EditText(ShareWifiActivity.this);
+					        input.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
 					        alert.setView(input);
 
 					        alert.setPositiveButton("Connect", new DialogInterface.OnClickListener() {
