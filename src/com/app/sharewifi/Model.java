@@ -5,6 +5,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Comparator;
+import java.util.Map;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -194,5 +196,20 @@ public class Model {
 				});
 		AlertDialog alert = builder.create();
 		alert.show();
+	}
+	
+	public class MapComparator implements Comparator<Map<String, ?>> {
+		private final String key;
+
+		public MapComparator(String key) {
+			this.key = key;
+		}
+
+		public int compare(Map<String, ?> first, Map<String, ?> second) {
+			//Null checking, both for maps and values
+			String firstValue = (String) first.get(key);
+			String secondValue = (String) second.get(key);
+			return firstValue.compareTo(secondValue);
+		}
 	}
 }

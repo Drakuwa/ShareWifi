@@ -2,10 +2,8 @@ package com.app.sharewifi;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -232,7 +230,7 @@ public class ShareWifiActivity extends Activity {
 		lv = (ListView) findViewById(R.id.accesspointslist);
 		lv.setTextFilterEnabled(true);
 
-		Collections.sort(data, new MapComparator("Name"));
+		Collections.sort(data, model.new MapComparator("Name"));
 
 		adapter = new SimpleAdapter(this, data, R.layout.listitem,
 				new String[] { "Id", "Name", "BSSID", "Signal", "Type", "Button" },
@@ -349,7 +347,7 @@ public class ShareWifiActivity extends Activity {
 				row.put("Button", R.drawable.connect);
 				data.add(row);
 			}
-		Collections.sort(data, new MapComparator("Name"));
+		Collections.sort(data, model.new MapComparator("Name"));
 		adapter.notifyDataSetChanged();
 	}
 	
@@ -450,18 +448,5 @@ public class ShareWifiActivity extends Activity {
 		}
 	}
 	
-	class MapComparator implements Comparator<Map<String, ?>> {
-		private final String key;
-
-		public MapComparator(String key) {
-			this.key = key;
-		}
-
-		public int compare(Map<String, ?> first, Map<String, ?> second) {
-			//Null checking, both for maps and values
-			String firstValue = (String) first.get(key);
-			String secondValue = (String) second.get(key);
-			return firstValue.compareTo(secondValue);
-		}
-	}
+	
 }
