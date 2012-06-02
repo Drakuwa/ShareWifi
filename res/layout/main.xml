@@ -13,14 +13,14 @@
 
         <Button
             android:id="@+id/scan"
-            android:background="@drawable/scan_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="0.35"
+            android:background="@drawable/scan_button"
             android:text="@string/scan"
+            android:textColor="#101010"
             android:textSize="22dip"
-            android:textStyle="bold"
-            android:textColor="#101010" />
+            android:textStyle="bold" />
 
         <ToggleButton
             android:id="@+id/toggle"
@@ -30,6 +30,20 @@
             android:background="@android:color/transparent"
             android:button="@drawable/togglewifi" />
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/status"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/status_bg"
+        android:layout_marginBottom="5dip"
+        android:layout_marginTop="5dip"
+        android:padding="10dip"
+        android:textSize="16dip"
+        android:textColor="#101010"
+        android:text="@string/status"
+        android:typeface="serif"
+        />
 
     <ListView
         android:id="@+id/accesspointslist"
