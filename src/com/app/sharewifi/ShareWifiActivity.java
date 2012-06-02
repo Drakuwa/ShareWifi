@@ -152,11 +152,9 @@ public class ShareWifiActivity extends Activity {
 						// save it!
 						mWiFiManager.saveConfiguration();
 						isConnectedOrFailed = true;
-						WifiInfo w = mWiFiManager.getConnectionInfo();
-						if(w.getBSSID()!=null){
-							TextView status = (TextView)findViewById(R.id.status);
-							status.setText("Status: Connected! \nAP name: " + w.getSSID() + "\n" + "BSSID: "+w.getBSSID() + "\n" + "Speed: " + w.getLinkSpeed()+"MBps");
-						}
+						
+						refreshStatus();
+						
 						unregisterReceiver(broadcastReceiver);
 						unregisterReceiver(br);
 						receiverRegistered = false;
@@ -565,11 +563,6 @@ public class ShareWifiActivity extends Activity {
 			while (true) {
 				if (isConnectedOrFailed) {
 					isConnectedOrFailed = false;
-					WifiInfo w = mWiFiManager.getConnectionInfo();
-					if(w.getBSSID()!=null){
-						TextView status = (TextView)findViewById(R.id.status);
-						status.setText("Status: Connected! \n AP name: " + w.getSSID() + "\n" + "BSSID: "+w.getBSSID() + "\n" + "Speed: "+ w.getLinkSpeed()+"MBps");
-					}
 					break;
 				}
 			}
@@ -583,6 +576,15 @@ public class ShareWifiActivity extends Activity {
 				dialog = null;
 			} catch (Exception e) {
 			}
+			refreshStatus();
+		}
+	}
+	
+	public void refreshStatus(){
+		WifiInfo w = mWiFiManager.getConnectionInfo();
+		if(w.getBSSID()!=null){
+			TextView status = (TextView)findViewById(R.id.status);
+			status.setText("Status: Connected! \n AP name: " + w.getSSID() + "\n" + "BSSID: "+w.getBSSID() + "\n" + "Speed: "+ w.getLinkSpeed()+"MBps");
 		}
 	}
 }
