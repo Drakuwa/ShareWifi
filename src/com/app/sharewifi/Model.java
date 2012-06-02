@@ -12,6 +12,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.util.Log;
 
 /**
  * A model class that resolves some of the business logic in the application.
@@ -122,10 +123,8 @@ public class Model {
 	 * function alert for sending/deleting it
 	 */
 	public void checkBugs() {
-
-		File file = new File("/data/data/com.app.wifipass/files/stack.trace");
+		File file = new File("/data/data/com.app.sharewifi/files/stack.trace");
 		if (file.exists()) {
-
 			String line = "";
 			String trace = "";
 			try {
@@ -186,7 +185,7 @@ public class Model {
 				new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int id) {
 						File file = new File(
-								"/data/data/com.app.wifipass/files/stack.trace");
+								"/data/data/com.app.sharewifi/files/stack.trace");
 						if (file.exists()) {
 							ctx
 									.deleteFile("stack.trace");
