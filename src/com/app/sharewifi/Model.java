@@ -12,6 +12,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Resources;
 
 /**
  * A model class that resolves some of the business logic in the application.
@@ -23,6 +24,13 @@ import android.content.Intent;
 public class Model {
 
 	private Context ctx;
+	
+	private Resources res = ctx.getResources();
+	private String welcometo = res.getString(R.string.welcometo);
+	private String ok = res.getString(R.string.ok);
+	private String internetoptions = res.getString(R.string.internetoptions);
+	private String internetconnectiondisabled = res.getString(R.string.internetconnectiondisabled);
+	private String unsentbugs = res.getString(R.string.unsentbugs);
 
 	/**
 	 * Constructor of the Model class which initializes the activity context.
@@ -47,9 +55,9 @@ public class Model {
 			// Welcome note...
 			AlertDialog.Builder builder = new AlertDialog.Builder(ctx);
 			builder.setMessage(
-					R.string.welcometo).setIcon(
+					welcometo).setIcon(
 					R.drawable.ic_launcher).setTitle(R.string.app_name).setCancelable(
-					false).setPositiveButton(R.string.ok,
+					false).setPositiveButton(ok,
 					new DialogInterface.OnClickListener() {
 						public void onClick(DialogInterface dialog, int id) {
 						}
@@ -76,7 +84,7 @@ public class Model {
 		AlertDialog.Builder builder = new AlertDialog.Builder(ctx);
 		builder.setMessage(txt).setIcon(R.drawable.ic_launcher).setTitle(
 				R.string.app_name).setCancelable(false).setPositiveButton(
-				R.string.ok, new DialogInterface.OnClickListener() {
+				ok, new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int id) {
 					}
 				});
@@ -96,9 +104,9 @@ public class Model {
 		AlertDialog.Builder builder = new AlertDialog.Builder(ctx);
 		builder
 				.setMessage(
-						R.string.internetconnectiondisabled)
+						internetconnectiondisabled)
 				.setIcon(R.drawable.ic_launcher).setTitle(R.string.app_name)
-				.setCancelable(false).setPositiveButton(R.string.internetoptions,
+				.setCancelable(false).setPositiveButton(internetoptions,
 						new DialogInterface.OnClickListener() {
 							public void onClick(DialogInterface dialog, int id) {
 								showNetOptions();
@@ -153,7 +161,7 @@ public class Model {
 	public void syncExceptionsAlert(final String trace) {
 		AlertDialog.Builder builder = new AlertDialog.Builder(ctx);
 		builder.setMessage(
-				R.string.unsentbugs)
+				unsentbugs)
 				.setIcon(R.drawable.ic_launcher)
 				.setTitle(R.string.app_name)
 				.setCancelable(true)
