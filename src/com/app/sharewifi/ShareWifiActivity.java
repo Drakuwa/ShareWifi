@@ -13,7 +13,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.res.Resources;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.wifi.ScanResult;
@@ -58,35 +57,59 @@ public class ShareWifiActivity extends Activity {
 	public boolean isConnectedOrFailed = false;
 	public boolean isWEP = false;
 	
-	public Model model = new Model(this);
+	public Model model;
 	private String password = "";
 	
-	private Resources res = getResources();
-	private String statuscon1 = res.getString(R.string.statusconnected1);
-	private String statuscon2 = res.getString(R.string.statusconnected2);
-	private String statuscon3 = res.getString(R.string.statusconnected3);
-	private String statusnotconnected = res.getString(R.string.status);
-	private String wificonnected = res.getString(R.string.wificonnected);
-	private String wifidisconnected = res.getString(R.string.wifidisconnected);
-	private String wifidisconnected2 = res.getString(R.string.wifidisconnected2);
-	private String pleasewaitwifi = res.getString(R.string.pleasewaitwifi);
-	private String pleasewait = res.getString(R.string.pleasewait);
-	private String pleaseenablewifi = res.getString(R.string.pleaseenablewifi);
-	private String connectto = res.getString(R.string.connectto);
-	private String connecttt = res.getString(R.string.connect);
-	private String enterpassword = res.getString(R.string.enterpassword);
-	private String cancel = res.getString(R.string.cancel);
-	private String signalstrength = res.getString(R.string.signalstrength);
-	private String connecting = res.getString(R.string.connecting);
-	private String alreadyconfigured = res.getString(R.string.alreadyconfigured);
-	private String delete = res.getString(R.string.delete);
+	//private Resources res = this.getResources();
+	private String statuscon1;// = getResources().getString(R.string.statusconnected1);
+	private String statuscon2;// = getResources().getString(R.string.statusconnected2);
+	private String statuscon3;// = getResources().getString(R.string.statusconnected3);
+	private String statusnotconnected;// = getResources().getString(R.string.status);
+	private String wificonnected;// = getResources().getString(R.string.wificonnected);
+	private String wifidisconnected;// = getResources().getString(R.string.wifidisconnected);
+	private String wifidisconnected2;// = getResources().getString(R.string.wifidisconnected2);
+	private String pleasewaitwifi;// = getResources().getString(R.string.pleasewaitwifi);
+	private String pleasewait;// = getResources().getString(R.string.pleasewait);
+	private String pleaseenablewifi;// = getResources().getString(R.string.pleaseenablewifi);
+	private String connectto;// = getResources().getString(R.string.connectto);
+	private String connecttt;// = getResources().getString(R.string.connect);
+	private String enterpassword;// = getResources().getString(R.string.enterpassword);
+	private String cancel;// = getResources().getString(R.string.cancel);
+	private String signalstrength;// = getResources().getString(R.string.signalstrength);
+	private String connecting;// = getResources().getString(R.string.connecting);
+	private String alreadyconfigured;// = getResources().getString(R.string.alreadyconfigured);
+	private String delete;// = getResources().getString(R.string.delete);
 
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
-				
+		
+		statuscon1 = getResources().getString(R.string.statusconnected1);
+		statuscon2 = getResources().getString(R.string.statusconnected2);
+		statuscon3 = getResources().getString(R.string.statusconnected3);
+		statusnotconnected = getResources().getString(R.string.status);
+		wificonnected = getResources().getString(R.string.wificonnected);
+		wifidisconnected = getResources().getString(R.string.wifidisconnected);
+		wifidisconnected2 = getResources().getString(R.string.wifidisconnected2);
+		pleasewaitwifi = getResources().getString(R.string.pleasewaitwifi);
+		pleasewait = getResources().getString(R.string.pleasewait);
+		pleaseenablewifi = getResources().getString(R.string.pleaseenablewifi);
+		connectto = getResources().getString(R.string.connectto);
+		connecttt = getResources().getString(R.string.connect);
+		enterpassword = getResources().getString(R.string.enterpassword);
+		cancel = getResources().getString(R.string.cancel);
+		signalstrength = getResources().getString(R.string.signalstrength);
+		connecting = getResources().getString(R.string.connecting);
+		alreadyconfigured = getResources().getString(R.string.alreadyconfigured);
+		delete = getResources().getString(R.string.delete);
+		
+		/**
+		 * Initialize the model
+		 */
+		model = new Model(this);		
+		
 		/**
 		 * Register Uncaught Exception Handler that saves the Force Close
 		 * exceptions in a local file
@@ -636,6 +659,10 @@ public class ShareWifiActivity extends Activity {
 					public void onClick(DialogInterface dialog, int id) {
 						netId = mWiFiManager.updateNetwork(conf);
 						mWiFiManager.removeNetwork(netId);
+						
+						TextView status = (TextView)findViewById(R.id.status);
+						status.setText(statusnotconnected);
+						
 						dialog.dismiss();
 					}
 				});

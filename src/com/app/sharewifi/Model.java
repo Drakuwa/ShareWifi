@@ -38,7 +38,7 @@ public class Model {
 	 * @param context
 	 */
 	public Model(Context context) {
-		ctx = context;
+		this.ctx = context;
 		res = ctx.getResources();
 		welcometo = res.getString(R.string.welcometo);
 		ok = res.getString(R.string.ok);
