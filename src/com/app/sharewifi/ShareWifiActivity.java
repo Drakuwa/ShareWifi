@@ -308,15 +308,7 @@ public class ShareWifiActivity extends Activity {
 							Toast.makeText(getApplicationContext(),
 									"Network is already configured!", Toast.LENGTH_SHORT)
 									.show();
-							if(existing!=null){
-								netId = mWiFiManager.updateNetwork(existing);
-								mWiFiManager.enableNetwork(netId, true);
-								
-								registerReceiver(broadcastReceiver, intentFilter);
-								registerReceiver(br, ifil);
-								receiverRegistered = true;
-								new isConnected().execute();
-							}
+							if(existing!=null)connectOrDelete(existing);
 						}
 						else if(data.get(position).get("Type").equals(R.drawable.open)){
 							AP.add("open-network");
@@ -599,4 +591,39 @@ public class ShareWifiActivity extends Activity {
 			status.setText("Status: Connected! \nAP name: " + w.getSSID() + "\n" + "BSSID: "+w.getBSSID() + "\n" + "Speed: "+ w.getLinkSpeed()+"MBps");
 		}
 	}
+	
+	public void connectOrDelete(final WifiConfiguration conf){
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		builder.setMessage(
+				"The network is already configured.")
+				.setIcon(R.drawable.ic_launcher)
+				.setTitle(R.string.app_name)
+				.setCancelable(true)
+				.setPositiveButton("Connect",
+						new DialogInterface.OnClickListener() {
+							public void onClick(DialogInterface dialog, int id) {
+								if(conf!=null){
+									netId = mWiFiManager.updateNetwork(conf);
+									mWiFiManager.enableNetwork(netId, true);
+									
+									registerReceiver(broadcastReceiver, intentFilter);
+									registerReceiver(br, ifil);
+									receiverRegistered = true;
+									new isConnected().execute();
+								}
+							}
+						});
+		builder.setNegativeButton("Delete",
+				new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int id) {
+						netId = mWiFiManager.updateNetwork(conf);
+						mWiFiManager.removeNetwork(netId);
+						dialog.dismiss();
+					}
+				});
+		AlertDialog alert = builder.create();
+		alert.show();
+	}
+	
+	//TODO Add string resources...
 }
