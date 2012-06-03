@@ -18,7 +18,7 @@
     <string name="wifidisconnected2">WIFI Disconnected! The password may be incorrect</string>
     <string name="pleasewaitwifi">Please wait a bit until your WiFi is enabled!</string>
     <string name="pleaseenablewifi">Please enable Your WiFi!</string>
-    <string name="connectto">Connect to </string>
+    <string name="connectto">Connect to: </string>
     <string name="enterpassword">Enter password: </string>
     <string name="connect">Connect</string>
     <string name="signalstrength">Signal strength: </string>
