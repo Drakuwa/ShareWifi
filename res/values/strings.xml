@@ -8,4 +8,27 @@
     <string name="cancel">Cancel</string>
     <string name="apn">Access Point Name:</string>
     <string name="status">Status: Not connected!</string>
+    <string name="typeofwifi">Type of wifi network</string>
+    <string name="connectbutton">Connect button</string>
+    <string name="statusconnected1">Status: Connected! \nAP name: </string>
+    <string name="statusconnected2">\nBSSID: </string>
+    <string name="statusconnected3">\nSpeed: </string>
+    <string name="wificonnected">WIFI connected</string>
+    <string name="wifidisconnected">WIFI disconnected!</string>
+    <string name="wifidisconnected2">WIFI Disconnected! The password may be incorrect</string>
+    <string name="pleasewaitwifi">Please wait a bit until your WiFi is enabled!</string>
+    <string name="pleaseenablewifi">Please enable Your WiFi!</string>
+    <string name="connectto">Connect to </string>
+    <string name="enterpassword">Enter password: </string>
+    <string name="connect">Connect</string>
+    <string name="signalstrength">Signal strength: </string>
+    <string name="connecting">Connecting!</string>
+    <string name="pleasewait">Please wait..</string>
+    <string name="alreadyconfigured">The network is already configured.</string>
+    <string name="delete">Delete</string>
+    <string name="welcometo">Welcome to ShareWifi</string>
+    <string name="ok">OK.</string>
+    <string name="internetoptions">Internet options</string>
+    <string name="internetconnectiondisabled">Your internet connection is disabled! Please enable WiFi, or mobile internet</string>
+    <string name="unsentbugs">There are unsent bugs, report them via email to the developer, or delete them? </string>
 </resources>

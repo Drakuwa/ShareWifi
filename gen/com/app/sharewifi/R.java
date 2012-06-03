@@ -53,13 +53,36 @@ public final class R {
         public static final int main=0x7f030002;
     }
     public static final class string {
+        public static final int alreadyconfigured=0x7f040018;
         public static final int apn=0x7f040006;
         public static final int app_name=0x7f040000;
         public static final int bssid=0x7f040003;
         public static final int cancel=0x7f040005;
+        public static final int connect=0x7f040014;
+        public static final int connectbutton=0x7f040009;
+        public static final int connecting=0x7f040016;
+        public static final int connectto=0x7f040012;
+        public static final int delete=0x7f040019;
+        public static final int enterpassword=0x7f040013;
+        public static final int internetconnectiondisabled=0x7f04001d;
+        public static final int internetoptions=0x7f04001c;
+        public static final int ok=0x7f04001b;
         public static final int pass=0x7f040002;
+        public static final int pleaseenablewifi=0x7f040011;
+        public static final int pleasewait=0x7f040017;
+        public static final int pleasewaitwifi=0x7f040010;
         public static final int save=0x7f040004;
         public static final int scan=0x7f040001;
+        public static final int signalstrength=0x7f040015;
         public static final int status=0x7f040007;
+        public static final int statusconnected1=0x7f04000a;
+        public static final int statusconnected2=0x7f04000b;
+        public static final int statusconnected3=0x7f04000c;
+        public static final int typeofwifi=0x7f040008;
+        public static final int unsentbugs=0x7f04001e;
+        public static final int welcometo=0x7f04001a;
+        public static final int wificonnected=0x7f04000d;
+        public static final int wifidisconnected=0x7f04000e;
+        public static final int wifidisconnected2=0x7f04000f;
     }
 }

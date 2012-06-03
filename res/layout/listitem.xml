@@ -12,7 +12,8 @@
         android:layout_centerInParent="true"
         android:layout_margin="10dip"
         android:clickable="true"
-        android:src="@drawable/open" />
+        android:src="@drawable/open"
+        android:contentDescription="@string/typeofwifi" />
     
     <ImageView
         android:id="@+id/connect"
@@ -22,6 +23,7 @@
         android:layout_centerInParent="true"
         android:layout_margin="10dip"
         android:clickable="true"
+        android:contentDescription="@string/connectbutton"
         android:src="@drawable/connect" />
 
     <TextView
@@ -34,7 +36,6 @@
         android:layout_marginTop="10dip"
         android:layout_toLeftOf="@id/connect"
         android:layout_toRightOf="@id/wifitype"
-        android:text="Some AP name"
         android:textColor="#202020"
         android:textSize="16dip"
         android:textStyle="bold" />
@@ -48,7 +49,6 @@
         android:layout_marginRight="10dip"
         android:layout_toLeftOf="@id/connect"
         android:layout_toRightOf="@id/wifitype"
-        android:text="00:DE:AD:BE:EF"
         android:textColor="#353535" />
     
     <TextView
@@ -61,7 +61,6 @@
         android:layout_marginRight="10dip"
         android:layout_toLeftOf="@id/connect"
         android:layout_toRightOf="@id/wifitype"
-        android:text="Signal:"
         android:textColor="#353535" />
 
     <TextView

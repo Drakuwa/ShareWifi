@@ -47,9 +47,9 @@ public class Model {
 			// Welcome note...
 			AlertDialog.Builder builder = new AlertDialog.Builder(ctx);
 			builder.setMessage(
-					"Добредојдовте во мобилната апликација на TKP").setIcon(
+					R.string.welcometo).setIcon(
 					R.drawable.ic_launcher).setTitle(R.string.app_name).setCancelable(
-					false).setPositiveButton("OK",
+					false).setPositiveButton(R.string.ok,
 					new DialogInterface.OnClickListener() {
 						public void onClick(DialogInterface dialog, int id) {
 						}
@@ -76,7 +76,7 @@ public class Model {
 		AlertDialog.Builder builder = new AlertDialog.Builder(ctx);
 		builder.setMessage(txt).setIcon(R.drawable.ic_launcher).setTitle(
 				R.string.app_name).setCancelable(false).setPositiveButton(
-				"OK..", new DialogInterface.OnClickListener() {
+				R.string.ok, new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int id) {
 					}
 				});
@@ -96,9 +96,9 @@ public class Model {
 		AlertDialog.Builder builder = new AlertDialog.Builder(ctx);
 		builder
 				.setMessage(
-						"Your internet connection is disabled! Please enable WiFi, or mobile internet")
+						R.string.internetconnectiondisabled)
 				.setIcon(R.drawable.ic_launcher).setTitle(R.string.app_name)
-				.setCancelable(false).setPositiveButton("Internet options",
+				.setCancelable(false).setPositiveButton(R.string.internetoptions,
 						new DialogInterface.OnClickListener() {
 							public void onClick(DialogInterface dialog, int id) {
 								showNetOptions();
@@ -153,7 +153,7 @@ public class Model {
 	public void syncExceptionsAlert(final String trace) {
 		AlertDialog.Builder builder = new AlertDialog.Builder(ctx);
 		builder.setMessage(
-				"There are unsent bugs, report them via email to the developer, or delete them? ")
+				R.string.unsentbugs)
 				.setIcon(R.drawable.ic_launcher)
 				.setTitle(R.string.app_name)
 				.setCancelable(true)

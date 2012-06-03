@@ -83,7 +83,7 @@ public class ShareWifiActivity extends Activity {
 		WifiInfo w = mWiFiManager.getConnectionInfo();
 		if(w.getBSSID()!=null){
 			TextView status = (TextView)findViewById(R.id.status);
-			status.setText("Status: Connected! \nAP name: " + w.getSSID() + "\n" + "BSSID: "+w.getBSSID() + "\n" + "Speed: " + w.getLinkSpeed()+"MBps");
+			status.setText(R.string.statusconnected1 + w.getSSID() + R.string.statusconnected2+w.getBSSID() + R.string.statusconnected3 + w.getLinkSpeed()+"MBps");
 		}
 		Log.d("xxx", w.getSSID()+"::"+w.getBSSID()+"::"+w.getLinkSpeed());
 
@@ -119,7 +119,7 @@ public class ShareWifiActivity extends Activity {
 								row.clear();
 								adapter.notifyDataSetChanged();
 								TextView status = (TextView)findViewById(R.id.status);
-								status.setText("Status: Not connected!");
+								status.setText(R.string.status);
 							}
 						}
 			}
@@ -154,7 +154,7 @@ public class ShareWifiActivity extends Activity {
 				if (currentNetworkInfo.getTypeName().equalsIgnoreCase("WIFI")) {
 					if (currentNetworkInfo.isConnected()) {
 						Toast.makeText(getApplicationContext(),
-								"WIFI Connected...", Toast.LENGTH_SHORT).show();
+								R.string.wificonnected, Toast.LENGTH_SHORT).show();
 						// If the phone has successfully connected to the AP,
 						// save it!
 						refreshStatus();
@@ -173,13 +173,13 @@ public class ShareWifiActivity extends Activity {
 						// NetworkInfo.DetailedState supstate =
 						// WifiInfo.getDetailedStateOf(s);
 						Toast.makeText(getApplicationContext(),
-								"WIFI Disconnected!", Toast.LENGTH_SHORT)
+								R.string.wifidisconnected, Toast.LENGTH_SHORT)
 								.show();
 						mWiFiManager.removeNetwork(netId);
 						isConnectedOrFailed = true;
 
 						TextView status = (TextView)findViewById(R.id.status);
-						status.setText("Status: Not connected!");
+						status.setText(R.string.status);
 						
 						unregisterReceiver(broadcastReceiver);
 						unregisterReceiver(br);
@@ -218,13 +218,13 @@ public class ShareWifiActivity extends Activity {
 									+ intent.getStringExtra(WifiManager.EXTRA_SUPPLICANT_ERROR));
 					Log.d("xxxX", "Error: ");
 					Toast.makeText(getApplicationContext(),
-							"WIFI Disconnected! The password may be incorrect",
+							R.string.wifidisconnected2,
 							Toast.LENGTH_SHORT).show();
 					mWiFiManager.removeNetwork(netId);
 					isConnectedOrFailed = true;
 					
 					TextView status = (TextView)findViewById(R.id.status);
-					status.setText("Status: Not connected!");
+					status.setText(R.string.status);
 					
 					unregisterReceiver(broadcastReceiver);
 					unregisterReceiver(br);
@@ -247,12 +247,12 @@ public class ShareWifiActivity extends Activity {
 					getAvailableAPs();
 				} else if (mWiFiManager.getWifiState() == WifiManager.WIFI_STATE_ENABLING) {
 					Toast.makeText(getApplicationContext(),
-							"Please wait a bit until your WiFi is enabled!",
+							R.string.pleasewaitwifi,
 							Toast.LENGTH_SHORT).show();
 				} else if (mWiFiManager.getWifiState() == WifiManager.WIFI_STATE_DISABLING
 						|| mWiFiManager.getWifiState() == WifiManager.WIFI_STATE_DISABLED) {
 					Toast.makeText(getApplicationContext(),
-							"Please enable Your WiFi!", Toast.LENGTH_SHORT)
+							R.string.pleaseenablewifi, Toast.LENGTH_SHORT)
 							.show();
 				}
 			}
@@ -286,12 +286,12 @@ public class ShareWifiActivity extends Activity {
 					public void onClick(View v) {
 						
 						final ArrayList<String> AP = new ArrayList<String>();
-						AP.add(data.get(position).get("BSSID")+"");
+						AP.add(data.get(position).get("BSSID").toString());
 						
 						//does the configuration of this network exist
 						boolean exists = false;
 						WifiConfiguration existing = null;
-						String ssid = data.get(position).get("Name")+"";
+						String ssid = data.get(position).get("Name").toString();
 						
 						// List available networks
 						List<WifiConfiguration> configs = mWiFiManager.getConfiguredNetworks();
@@ -312,40 +312,37 @@ public class ShareWifiActivity extends Activity {
 						}
 						else if(data.get(position).get("Type").equals(R.drawable.open)){
 							AP.add("open-network");
-					        AP.add(data.get(position).get("Name")+"");
-					        AP.add(data.get(position).get("Type")+"");
+					        AP.add(data.get(position).get("Name").toString());
+					        AP.add(data.get(position).get("Type").toString());
 					        connectTo(AP, true);
 						} else {
 							AlertDialog.Builder alert = new AlertDialog.Builder(ShareWifiActivity.this);
-					        alert.setTitle("Connect to "+data.get(position).get("Name")+"");
-					        alert.setMessage("Enter password: ");
+					        alert.setTitle(R.string.connectto+data.get(position).get("Name").toString());
+					        alert.setMessage(R.string.enterpassword);
 
 					        // Set an EditText view to get user input 
 					        final EditText input = new EditText(ShareWifiActivity.this);
 					        input.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
 					        alert.setView(input);
 
-					        alert.setPositiveButton("Connect", new DialogInterface.OnClickListener() {
+					        alert.setPositiveButton(R.string.connect, new DialogInterface.OnClickListener() {
 					        public void onClick(DialogInterface dialog, int whichButton) {
 					          Editable value = input.getText();
 					          password = value.toString();
 					          AP.add(password);
-					          AP.add(data.get(position).get("Name")+"");
-					          AP.add(data.get(position).get("Type")+"");
+					          AP.add(data.get(position).get("Name").toString());
+					          AP.add(data.get(position).get("Type").toString());
 					          connectTo(AP, false);
 					          dialog.dismiss();
 					          }
 					        });
-					        alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+					        alert.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
 					          public void onClick(DialogInterface dialog, int whichButton) {
 					            dialog.cancel();
 					          }
 					        });
 					        alert.show();
 						}
-						
-
-				        
 					}
 				});
 				return super.getView(position, convertView, parent);
@@ -424,7 +421,7 @@ public class ShareWifiActivity extends Activity {
 				row.put("Id", sr.BSSID);
 				row.put("Name", sr.SSID);
 				row.put("BSSID", sr.BSSID);
-				row.put("Signal", "Signal strength: "+sr.level+"dBm");
+				row.put("Signal", R.string.signalstrength+sr.level+"dBm");
 				if (sr.capabilities.contains("WEP")) {
 					row.put("Type", R.drawable.wep);
 				} else if (sr.capabilities.contains("WPA")) {
@@ -553,8 +550,8 @@ public class ShareWifiActivity extends Activity {
 		@Override
 		protected void onPreExecute() {
 			dialog = new ProgressDialog(ShareWifiActivity.this);
-			dialog.setTitle("Connecting!");
-			dialog.setMessage("Please wait..");
+			dialog.setTitle(R.string.connecting);
+			dialog.setMessage(R.string.pleasewait+"");
 			dialog.setCancelable(false);
 			dialog.setIndeterminate(true);
 			try {
@@ -588,18 +585,18 @@ public class ShareWifiActivity extends Activity {
 		WifiInfo w = mWiFiManager.getConnectionInfo();
 		if(w.getBSSID()!=null){
 			TextView status = (TextView)findViewById(R.id.status);
-			status.setText("Status: Connected! \nAP name: " + w.getSSID() + "\n" + "BSSID: "+w.getBSSID() + "\n" + "Speed: "+ w.getLinkSpeed()+"MBps");
+			status.setText(R.string.statusconnected1 + w.getSSID() + R.string.statusconnected2+w.getBSSID() + R.string.statusconnected3 + w.getLinkSpeed()+"MBps");
 		}
 	}
 	
 	public void connectOrDelete(final WifiConfiguration conf){
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 		builder.setMessage(
-				"The network is already configured.")
+				R.string.alreadyconfigured)
 				.setIcon(R.drawable.ic_launcher)
 				.setTitle(R.string.app_name)
 				.setCancelable(true)
-				.setPositiveButton("Connect",
+				.setPositiveButton(R.string.connect,
 						new DialogInterface.OnClickListener() {
 							public void onClick(DialogInterface dialog, int id) {
 								if(conf!=null){
@@ -613,7 +610,7 @@ public class ShareWifiActivity extends Activity {
 								}
 							}
 						});
-		builder.setNegativeButton("Delete",
+		builder.setNegativeButton(R.string.delete,
 				new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int id) {
 						netId = mWiFiManager.updateNetwork(conf);
@@ -624,6 +621,4 @@ public class ShareWifiActivity extends Activity {
 		AlertDialog alert = builder.create();
 		alert.show();
 	}
-	
-	//TODO Add string resources...
 }
