@@ -25,12 +25,12 @@ public class Model {
 
 	private Context ctx;
 	
-	private Resources res = ctx.getResources();
-	private String welcometo = res.getString(R.string.welcometo);
-	private String ok = res.getString(R.string.ok);
-	private String internetoptions = res.getString(R.string.internetoptions);
-	private String internetconnectiondisabled = res.getString(R.string.internetconnectiondisabled);
-	private String unsentbugs = res.getString(R.string.unsentbugs);
+	private Resources res;
+	private String welcometo;
+	private String ok;
+	private String internetoptions;
+	private String internetconnectiondisabled;
+	private String unsentbugs;
 
 	/**
 	 * Constructor of the Model class which initializes the activity context.
@@ -39,6 +39,12 @@ public class Model {
 	 */
 	public Model(Context context) {
 		ctx = context;
+		res = ctx.getResources();
+		welcometo = res.getString(R.string.welcometo);
+		ok = res.getString(R.string.ok);
+		internetoptions = res.getString(R.string.internetoptions);
+		internetconnectiondisabled = res.getString(R.string.internetconnectiondisabled);
+		unsentbugs = res.getString(R.string.unsentbugs);
 	}
 
 	/**
