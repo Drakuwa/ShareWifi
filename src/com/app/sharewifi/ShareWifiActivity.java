@@ -305,9 +305,9 @@ public class ShareWifiActivity extends Activity {
 						}
 						//If the network is already configured, connect to it!
 						if(exists){
-							Toast.makeText(getApplicationContext(),
-									"Network is already configured!", Toast.LENGTH_SHORT)
-									.show();
+							//Toast.makeText(getApplicationContext(),
+							//		"Network is already configured!", Toast.LENGTH_SHORT)
+							//		.show();
 							if(existing!=null)connectOrDelete(existing);
 						}
 						else if(data.get(position).get("Type").equals(R.drawable.open)){
