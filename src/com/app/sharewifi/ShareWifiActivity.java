@@ -17,6 +17,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.wifi.ScanResult;
 import android.net.wifi.WifiConfiguration;
+import android.net.wifi.WifiConfiguration.AuthAlgorithm;
 import android.net.wifi.WifiConfiguration.KeyMgmt;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
@@ -358,7 +359,7 @@ public class ShareWifiActivity extends Activity {
 							AP.add("open-network");
 					        AP.add(data.get(position).get("Name").toString());
 					        AP.add(data.get(position).get("Type").toString());
-					        connectTo(AP, true);
+					        connectTo(AP, true, false);
 						} else {
 							AlertDialog.Builder alert = new AlertDialog.Builder(ShareWifiActivity.this);
 					        alert.setTitle(connectto+data.get(position).get("Name").toString());
@@ -376,7 +377,9 @@ public class ShareWifiActivity extends Activity {
 					          AP.add(password);
 					          AP.add(data.get(position).get("Name").toString());
 					          AP.add(data.get(position).get("Type").toString());
-					          connectTo(AP, false);
+					          if(data.get(position).get("Type").equals(R.drawable.wep))
+					        	  connectTo(AP, false, true);
+					          else connectTo(AP, false, false);
 					          dialog.dismiss();
 					          }
 					        });
@@ -490,7 +493,7 @@ public class ShareWifiActivity extends Activity {
 	 * 
 	 * @param AP
 	 */
-	public void connectTo(ArrayList<String> AP, boolean isOpen) {
+	public void connectTo(ArrayList<String> AP, boolean isOpen, boolean isWEP) {
 
 		//does the configuration of this network exist
 		//boolean exists = false;
@@ -501,10 +504,18 @@ public class ShareWifiActivity extends Activity {
 		
 		String ssid = AP.get(2);
 		//if (AP.get(3).contains("WEP:true"))
-		if (AP.get(3).equals(R.drawable.wep))
-			isWEP = true;
-		else
-			isWEP = false;
+		//if (AP.get(3).equals(R.drawable.wep))
+		//{
+		//	isWEP = true;
+		//	Log.d("xxx", "WEP = True!");
+		//	Log.d("xxx", "AP.get(3) = "+AP.get(3));
+		//}
+		//else
+		//{
+		//	isWEP = false;
+		//	Log.d("xxx", "WEP = False!");
+		//	Log.d("xxx", "AP.get(3) = "+AP.get(3));
+		//}
 		
 
 		// List available networks
@@ -547,11 +558,20 @@ public class ShareWifiActivity extends Activity {
 				wifiConfig.SSID = "\"" + ssid + "\"";
 				wifiConfig.BSSID = bssid;
 				if (isWEP) {
-					wifiConfig.wepKeys[0] = "\"" + password + "\"";
+					if (isHexWepKey(password)) {
+						Log.d("xxx", "HEX = True!");
+                        wifiConfig.wepKeys[0] = password;
+                    } else {
+                    	Log.d("xxx", "HEX = False!");
+                    	wifiConfig.wepKeys[0] = "\"" + password + "\"";
+                    }
 					wifiConfig.wepTxKeyIndex = 0;
+					wifiConfig.allowedKeyManagement.set(KeyMgmt.NONE);
 					wifiConfig.allowedKeyManagement.set(WifiConfiguration.KeyMgmt.NONE);
 					wifiConfig.allowedGroupCiphers.set(WifiConfiguration.GroupCipher.WEP40);
-					//wifiConfig.allowedGroupCiphers.set(WifiConfiguration.GroupCipher.WEP104);
+					wifiConfig.allowedGroupCiphers.set(WifiConfiguration.GroupCipher.WEP104);
+					wifiConfig.allowedAuthAlgorithms.set(AuthAlgorithm.OPEN);
+		            wifiConfig.allowedAuthAlgorithms.set(AuthAlgorithm.SHARED);
 					wifiConfig.priority = 1; 
 				} else
 					wifiConfig.preSharedKey = "\"" + password + "\"";
@@ -669,4 +689,24 @@ public class ShareWifiActivity extends Activity {
 		AlertDialog alert = builder.create();
 		alert.show();
 	}
+	
+	private static boolean isHexWepKey(String wepKey) {
+        final int len = wepKey.length();
+        
+        // WEP-40, WEP-104, and some vendors using 256-bit WEP (WEP-232?)
+        if (len != 10 && len != 26 && len != 58) {
+            return false;
+        }
+        
+        return isHex(wepKey);
+	}
+	private static boolean isHex(String key) {
+        for (int i = key.length() - 1; i >= 0; i--) {
+            final char c = key.charAt(i);
+            if (!(c >= '0' && c <= '9' || c >= 'A' && c <= 'F' || c >= 'a' && c <= 'f')) {
+                return false;
+            }
+        }
+        return true;
+    }
 }
