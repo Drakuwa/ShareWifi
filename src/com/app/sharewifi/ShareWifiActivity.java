@@ -551,7 +551,7 @@ public class ShareWifiActivity extends Activity {
 					wifiConfig.wepTxKeyIndex = 0;
 					wifiConfig.allowedKeyManagement.set(WifiConfiguration.KeyMgmt.NONE);
 					wifiConfig.allowedGroupCiphers.set(WifiConfiguration.GroupCipher.WEP40);
-					wifiConfig.allowedGroupCiphers.set(WifiConfiguration.GroupCipher.WEP104);
+					//wifiConfig.allowedGroupCiphers.set(WifiConfiguration.GroupCipher.WEP104);
 					wifiConfig.priority = 1; 
 				} else
 					wifiConfig.preSharedKey = "\"" + password + "\"";
