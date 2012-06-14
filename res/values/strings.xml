@@ -1,28 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">ShareWifi</string>
-    <string name="scan">Scan!</string>
+    <string name="scan">Scan</string>
     <string name="pass">Password:</string>
     <string name="bssid">BSSID:</string>
-    <string name="save">Save!</string>
+    <string name="save">Save</string>
     <string name="cancel">Cancel</string>
     <string name="apn">Access Point Name:</string>
-    <string name="status">Status: Not connected!</string>
+    <string name="status">Status: Not connected</string>
     <string name="typeofwifi">Type of wifi network</string>
     <string name="connectbutton">Connect button</string>
-    <string name="statusconnected1">Status: Connected! \nAP name: </string>
+    <string name="statusconnected1">Status: Connected. \nAP name: </string>
     <string name="statusconnected2">\nBSSID: </string>
     <string name="statusconnected3">\nSpeed: </string>
     <string name="wificonnected">WIFI connected</string>
-    <string name="wifidisconnected">WIFI disconnected!</string>
-    <string name="wifidisconnected2">WIFI Disconnected! The password may be incorrect</string>
-    <string name="pleasewaitwifi">Please wait a bit until your WiFi is enabled!</string>
-    <string name="pleaseenablewifi">Please enable Your WiFi!</string>
+    <string name="wifidisconnected">WIFI disconnected</string>
+    <string name="wifidisconnected2">WIFI Disconnected. The password may be incorrect</string>
+    <string name="pleasewaitwifi">Please wait a bit until your WiFi is enabled.</string>
+    <string name="pleaseenablewifi">Please enable Your WiFi.</string>
     <string name="connectto">Connect to: </string>
     <string name="enterpassword">Enter password: </string>
     <string name="connect">Connect</string>
     <string name="signalstrength">Signal strength: </string>
-    <string name="connecting">Connecting!</string>
+    <string name="connecting">Connecting&#8230;</string>
     <string name="pleasewait">Please wait..</string>
     <string name="alreadyconfigured">The network is already configured.</string>
     <string name="delete">Delete</string>
