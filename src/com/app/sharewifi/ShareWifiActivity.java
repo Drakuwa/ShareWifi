@@ -58,6 +58,7 @@ public class ShareWifiActivity extends Activity {
 	public boolean isConnectedOrFailed = false;
 	public boolean isWEP = false;
 	
+	private DBAdapter db = new DBAdapter(this);
 	public Model model;
 	private String password = "";
 	
@@ -86,6 +87,12 @@ public class ShareWifiActivity extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
+		
+		try {
+			db.open();
+		} catch (Exception e) {
+			// handle exception
+		}
 		
 		statuscon1 = getResources().getString(R.string.statusconnected1);
 		statuscon2 = getResources().getString(R.string.statusconnected2);
@@ -401,7 +408,7 @@ public class ShareWifiActivity extends Activity {
 
 	/**
 	 * on destroy of the activity, unregister the broadcast receivers if there
-	 * are some left
+	 * are some left, and close the db cursor
 	 */
 	@Override
 	protected void onDestroy() {
@@ -412,9 +419,19 @@ public class ShareWifiActivity extends Activity {
 				receiverRegistered = false;
 			}
 		}
+		if(db!=null){ 
+			try {
+				db.close();
+			} catch (Exception e) {
+				//handle exception
+			}
+		}
 		super.onDestroy();
 	}
 
+	/**
+	 * Refresh the toggle button state
+	 */
 	@Override
 	protected void onResume() {
 		if (mWiFiManager.isWifiEnabled()
