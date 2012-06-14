@@ -96,14 +96,26 @@ public class DBAdapter
         return db.insert(DATABASE_TABLE, null, initialValues);
     }
     
+    //---retrieve a particular AP---
+    public Cursor getAP(String id) throws SQLException {
+		Cursor mCursor = db.query(true, DATABASE_TABLE, new String[] {
+				AP_ID, AP_TIMESTAMP, AP_BSSID, AP_NAME, AP_WEP,
+				AP_LOCATION, AP_COUNTRY, AP_PASSWORD }, AP_ID + " LIKE "
+				+ "'" + id + "'", null, null, null, null, null);
+		if (mCursor != null) {
+			mCursor.moveToFirst();
+		}
+		return mCursor;
+	}
+    
     //---deletes a particular AP---
     public boolean deleteAP(long rowId) 
     {
         return db.delete(DATABASE_TABLE, AP_ID + 
         		"=" + rowId, null) > 0;
     }
-        //---retrieves all the APs---
-    public Cursor getAllGames() 
+    //---retrieves all the APs---
+    public Cursor getAllAPs() 
     {
         return db.query(DATABASE_TABLE, new String[] {
         		AP_ID,
@@ -120,7 +132,7 @@ public class DBAdapter
                 null, 
                 null);
     }
-        //---updates an AP---
+    //---updates an AP---
     public boolean updateAP(long rowId, ArrayList<String> ap) 
     {
         ContentValues args = new ContentValues();
