@@ -17,10 +17,10 @@ public final class R {
         public static final int connect_button=0x7f020003;
         public static final int ic_launcher=0x7f020004;
         public static final int open=0x7f020005;
-        public static final int scan_button=0x7f020006;
-        public static final int scan_small=0x7f020007;
-        public static final int scan_small_active=0x7f020008;
-        public static final int status_bg=0x7f020009;
+        public static final int scan_active=0x7f020006;
+        public static final int scan_button=0x7f020007;
+        public static final int scan_normal=0x7f020008;
+        public static final int status_normal=0x7f020009;
         public static final int togglewifi=0x7f02000a;
         public static final int wep=0x7f02000b;
         public static final int wifi_off=0x7f02000c;
@@ -28,7 +28,7 @@ public final class R {
         public static final int wpa=0x7f02000e;
     }
     public static final class id {
-        public static final int accesspointslist=0x7f050011;
+        public static final int accesspointslist=0x7f050012;
         public static final int apID=0x7f05000d;
         public static final int apn=0x7f050001;
         public static final int apntxt=0x7f050000;
@@ -41,10 +41,11 @@ public final class R {
         public static final int passtxt=0x7f050002;
         public static final int password=0x7f050003;
         public static final int save=0x7f050006;
-        public static final int scan=0x7f05000e;
+        public static final int scan=0x7f050011;
+        public static final int scan_toggle=0x7f05000f;
         public static final int signal=0x7f05000c;
-        public static final int status=0x7f050010;
-        public static final int toggle=0x7f05000f;
+        public static final int status=0x7f05000e;
+        public static final int toggle=0x7f050010;
         public static final int wifitype=0x7f050008;
     }
     public static final class layout {

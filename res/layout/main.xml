@@ -1,26 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:background="@drawable/bg"
     android:orientation="vertical" >
 
+    <TextView
+        android:id="@+id/status"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/status_normal"
+        android:layout_marginBottom="5dip"
+        android:layout_marginTop="5dip"
+        android:padding="10dip"
+        android:textSize="14sp"
+        android:textColor="#101010"
+        android:text="@string/status"
+        android:typeface="serif"
+        android:layout_alignParentTop="true"
+        />
+    
     <LinearLayout
+        android:id="@+id/scan_toggle"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:baselineAligned="false"
+        android:layout_alignParentBottom="true"
         android:orientation="horizontal" >
-
-        <Button
-            android:id="@+id/scan"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.35"
-            android:background="@drawable/scan_button"
-            android:text="@string/scan"
-            android:textColor="#101010"
-            android:textSize="22dip"
-            android:textStyle="bold" />
 
         <ToggleButton
             android:id="@+id/toggle"
@@ -29,27 +35,26 @@
             android:layout_weight="0.3"
             android:background="@android:color/transparent"
             android:button="@drawable/togglewifi" />
+
+        <Button
+            android:id="@+id/scan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.35"
+            android:background="@drawable/scan_button"
+            android:text="@string/scan"
+            android:textColor="#d9d9d9"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
     </LinearLayout>
-
-    <TextView
-        android:id="@+id/status"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/status_bg"
-        android:layout_marginBottom="5dip"
-        android:layout_marginTop="5dip"
-        android:padding="10dip"
-        android:textSize="16dip"
-        android:textColor="#101010"
-        android:text="@string/status"
-        android:typeface="serif"
-        />
-
+    
     <ListView
         android:id="@+id/accesspointslist"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dip"
         android:layout_margin="5dip"
-        android:cacheColorHint="#00000000" />
-
-</LinearLayout>
+        android:cacheColorHint="#00000000"
+        android:layout_above="@+id/scan_toggle"
+        android:layout_below="@+id/status" />
+</RelativeLayout>
